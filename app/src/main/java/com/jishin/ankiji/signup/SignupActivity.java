@@ -375,7 +375,7 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            Uri downloadUri = taskSnapshot.getDownloadUrl();
+                            Task<Uri> downloadUri = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                             imageUrlFromCloudStorage = downloadUri.toString();
                             Log.d("imageUrlCloud_Galery", imageUrlFromCloudStorage);
                             Toast.makeText(SignupActivity.this, "Upload Image in Galery Successfully", Toast.LENGTH_LONG).show();
@@ -397,7 +397,7 @@ public class SignupActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Uri downloadUri = taskSnapshot.getDownloadUrl();
+                            Task<Uri> downloadUri = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                             imageUrlFromCloudStorage = downloadUri.toString();
                             Log.d("imageUrlCloud_Capture", imageUrlFromCloudStorage);
                             Toast.makeText(SignupActivity.this, "Upload Image Capture Successfully", Toast.LENGTH_LONG).show();

@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -455,7 +456,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            Uri downloadUri = taskSnapshot.getDownloadUrl();
+                            Task<Uri> downloadUri = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                             imageUrlFromCloudStorage = downloadUri.toString();
                             Log.d("imageUrlCloud_Galery", imageUrlFromCloudStorage);
                             savePhoto(imageUrlFromCloudStorage);
@@ -493,7 +494,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Uri downloadUri = taskSnapshot.getDownloadUrl();
+                            Task<Uri> downloadUri = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                             imageUrlFromCloudStorage = downloadUri.toString();
                             Log.d("imageUrlCloud_Capture", imageUrlFromCloudStorage);
                             Toast.makeText(ProfileActivity.this, "Upload Image Capture Successfully", Toast.LENGTH_LONG).show();

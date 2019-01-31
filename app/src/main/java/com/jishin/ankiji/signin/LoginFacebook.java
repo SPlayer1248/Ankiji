@@ -41,7 +41,6 @@ public class LoginFacebook {
     public CallbackManager callbackManager;
     private Activity mActivity;
     private FirebaseAuth mAuth;
-    //private DatabaseReference mData;
     private DatabaseService mData = DatabaseService.getInstance();
     private ProgressDialog progressDialog;
     private String email = "", userName = "", avatar = "", idUser;
@@ -63,7 +62,7 @@ public class LoginFacebook {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 handleFacebookAccessToken(loginResult.getAccessToken());
-                //Toast.makeText(mActivity, R.string.login_success, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, R.string.login_success, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -75,6 +74,7 @@ public class LoginFacebook {
             @Override
             public void onError(FacebookException error) {
                 Toast.makeText(mActivity, R.string.login_failed, Toast.LENGTH_SHORT).show();
+                Log.d("errorfb", String.valueOf(error));
             }
         });
     }
